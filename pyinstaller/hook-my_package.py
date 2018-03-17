@@ -1,0 +1,1 @@
+hiddenimports = ["app", "calc"]
