@@ -118,4 +118,4 @@ Since my program uses `matplotlib`, it tries to pull in PyQt and may also includ
 
 The `-D` option tells PyInstaller to create a directory for the dependencies instead of embedding them into the binary executable.
 
-If PyInstaller ran successfully, `./dist/my_mandelbrot/my_mandelbrot[.exe]` should be an executable that runs the same program that `my_mandelbrot.py` does. If you copy it and the contents of the directory it is in to another computer with the same platform, it should work without modification.
+If PyInstaller ran successfully, `./dist/my_mandelbrot/my_mandelbrot[.exe]` should be an executable that runs the same program that `my_mandelbrot.py` does. If you copy it and the contents of the directory it is in to another computer with the same platform, it should work without modification. It is up to you to decide how to package the bundle for distribution appropriate to your needs. 
