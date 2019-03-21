@@ -98,7 +98,7 @@ PyInstaller, at its simplest, is just ran on a Python script and it automaticall
 This file simply lists the name of a package, and if PyInstaller sees that package imported, it will automatically include the `hiddenimports` submodules in the bundle.
 `pyinstaller/hook-my_package.py`
 ```python
-hiddenimports = ["app", "calc"]
+hiddenimports = ["my_package.app", "my_package.calc"]
 ```
 
 I run PyInstaller like so from within the `pyinstaller/` directory in my repository:
