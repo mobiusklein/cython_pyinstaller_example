@@ -40,6 +40,8 @@ setup(name='my_package',
       ext_modules=extensions)
 ```
 
+Running `python setup.py install` installs the package into your site-packages directory. If using a system python interpreter instead of a virtual environment on a shared machine or as a non-administrator, you may need to pass `--user` to redirect it to your user-specific site-packages instead. Alternatively, you may use `pip install -v .` instead of `python setup.py install`. To test in-place, you can use `python setup.py develop` or `pip install -v -e .` to avoid needing to repeatedly copy all package files to site-packages and allow you to modify **python** code without re-installing. You can test building your C extensions in-place using `python setup.py build_ext -i`, which is also preferable to re-installing the entire package until you are ready to bundle it with PyInstaller, where you will want to perform a full installation before proceeding.
+
 ## Step 2. Creating the PyInstaller script
 The next step is to create a short script to configure and execute your program's entry point, so I'll refer to this as the `entrypoint script`. Depending upon how complicated your program is, this may just be two lines of code, or it may perform arbitrary computation.
 
@@ -100,6 +102,7 @@ This file simply lists the name of a package, and if PyInstaller sees that packa
 ```python
 hiddenimports = ["my_package.app", "my_package.calc"]
 ```
+There are more sophisticated tools you can use when writing hooks, please see the PyInstaller documentation and see examples like the PyInstaller hooks for popular libraries like `scipy` for more details.
 
 I run PyInstaller like so from within the `pyinstaller/` directory in my repository:
 
@@ -118,4 +121,4 @@ Since my program uses `matplotlib`, it tries to pull in PyQt and may also includ
 
 The `-D` option tells PyInstaller to create a directory for the dependencies instead of embedding them into the binary executable.
 
-If PyInstaller ran successfully, `./dist/my_mandelbrot/my_mandelbrot[.exe]` should be an executable that runs the same program that `my_mandelbrot.py` does. If you copy it and the contents of the directory it is in to another computer with the same platform, it should work without modification. It is up to you to decide how to package the bundle for distribution appropriate to your needs. 
+If PyInstaller ran successfully, `./dist/my_mandelbrot/my_mandelbrot[.exe]` should be an executable that runs the same program that `my_mandelbrot.py` does, along with a mountain of `.so`/`.dll` files depending upon your platform. If you copy it and the contents of the directory it is in to another computer with the same platform, it should work without modification. It is up to you to decide how to package the bundle for distribution appropriate to your needs. 
